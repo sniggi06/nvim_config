@@ -9,7 +9,12 @@ vim.pack.add({
    checkout = 'main',
  },
 
+ { src = 'https://github.com/folke/tokyonight.nvim'},
+
 })
+
+-- colorscheme
+vim.cmd.colorscheme('tokyonight-night')
 
 -- mini.pick : fuzzy finder
 local pick = require('mini.pick').setup()
