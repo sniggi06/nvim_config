@@ -26,6 +26,8 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
 
+-- floating windows bekommen Ränder
+vim.o.winborder = 'rounded'
 -- cursor kram
 vim.o.scrolloff = 10
 vim.o.cursorline = true 
