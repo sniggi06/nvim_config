@@ -12,6 +12,11 @@ vim.pack.add({
  { src = 'https://github.com/folke/tokyonight.nvim'},
 
  { src = 'https://github.com/neovim/nvim-lspconfig' },
+ {
+   src = 'https://github.com/Saghen/blink.cmp',
+   version = 'v1.10.2', --V1 version: V2 ist ein großer rewrite, der für nvim.12 aber bald sinn machen könnte
+ },
+
 })
 
 -- ==== AUSSEHEN ====
@@ -56,6 +61,18 @@ vim.diagnostic.config({
   virtual_text = true,
 })
 
+-- blink.cmp für autocompletion
+require('blink.cmp').setup({
+  keymap = {
+    preset = 'super-tab',
+  },
+  completion = {
+    documentation = { --zeigt doku automatisch nach einer Weile an
+      auto_show = true,
+      auto_show_delay_ms = 500,
+    },
+  },
+})
 -- ==== BASICS ====
 -- basic optionen für vanilla nvim
 require('options') -- lua/options.lua
