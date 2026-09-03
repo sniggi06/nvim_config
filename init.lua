@@ -3,7 +3,8 @@ vim.g.mapleader = " "
 -- packages
 -- guter Guide: https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack.html
 vim.pack.add({
- { src = 'https://github.com/echasnovski/mini.pick' },
+ { src = 'https://github.com/echasnovski/mini.pick' }, -- fuzzy finder
+ { src = 'https://github.com/nvim-mini/mini.extra' }, -- extra queries insb. document_symbols für mini.pick + anderer shit
 
  { src = 'https://github.com/nvim-treesitter/nvim-treesitter',
    checkout = 'main',
@@ -26,6 +27,7 @@ vim.cmd.colorscheme('tokyonight-night')
 -- ==== FUZZY FINDER ====
 -- mini.pick : fuzzy finder
 local pick = require('mini.pick').setup()
+local pick = require('mini.extra').setup()
 
 vim.keymap.set('n', '<leader><leader>', function()
   MiniPick.builtin.files()
@@ -43,6 +45,9 @@ vim.keymap.set('n', '<leader>sg', ':Pick grep_live<CR>', {
   desc = 'Live grep',
 })
 
+vim.keymap.set('n', '<leader>ss', ':Pick lsp scope="document_symbol"<cr>', {
+  desc = 'Document symbols',
+})
 -- ==== TREESITTER CORE UND PLUGIN ====
 -- nvim-treesitter: treesitter parser und queries installieren
 require('nvim-treesitter').setup {
