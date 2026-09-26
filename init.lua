@@ -79,5 +79,9 @@ require('blink.cmp').setup({
   },
 })
 -- ==== BASICS ====
+-- FIX: weil kmonad einen ganz kurzen esc hold->release mit der CAPS-Makro schickt
+vim.o.ttimeout = true
+vim.o.ttimeoutlen = 0 --MUSS weniger als der "around" in kmonad sein
+
 -- basic optionen für vanilla nvim
 require('options') -- lua/options.lua
