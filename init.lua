@@ -59,7 +59,46 @@ require('nvim-treesitter').install{'cpp','haskell','python'}
 
 
 -- ==== LSP ====
+vim.filetype.add({
+  extension = {
+    tpp = 'cpp',
+    hpp = 'cpp',
+  },
+})
+
 vim.lsp.enable({'clangd', 'pyright'})
+
+-- LSP keymaps
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    local opts = { buffer = ev.buf, silent = true }
+
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {
+      buffer = ev.buf,
+      desc = 'LSP: Go to definition',
+    })
+
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {
+      buffer = ev.buf,
+      desc = 'LSP: Go to declaration',
+    })
+
+    vim.keymap.set('n', 'gy', vim.lsp.buf.type_definition, {
+      buffer = ev.buf,
+      desc = 'LSP: Go to type definition',
+    })
+
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, {
+      buffer = ev.buf,
+      desc = 'LSP: Go to implementation',
+    })
+
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, {
+      buffer = ev.buf,
+      desc = 'LSP: Find references',
+    })
+  end,
+})
 -- pyright ist mit npm installiert
 
 vim.diagnostic.config({
