@@ -48,6 +48,36 @@ vim.keymap.set('n', '<leader>sg', ':Pick grep_live<CR>', {
 vim.keymap.set('n', '<leader>ss', ':Pick lsp scope="document_symbol"<cr>', {
   desc = 'Document symbols',
 })
+
+-- Nur im aktuellen Buffer suchen
+vim.keymap.set('n', '<leader>sl', function()
+  local buf = vim.api.nvim_get_current_buf()
+  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+  local items = {}
+
+  for lnum, line in ipairs(lines) do
+    table.insert(items, {
+      bufnr = buf,
+      lnum = lnum,
+      text = string.format('%4d: %s', lnum, line),
+    })
+  end
+
+  MiniPick.start({
+    source = {
+      name = 'Current buffer lines',
+      items = items,
+    },
+  })
+end, { desc = 'Search current buffer' })
+
+-- Nur offene Buffer durchsuchen
+vim.keymap.set('n', '<leader>so', function()
+  MiniPick.builtin.buffers()
+end, { desc = 'Open buffers' })
+
+
+
 -- ==== TREESITTER CORE UND PLUGIN ====
 -- nvim-treesitter: treesitter parser und queries installieren
 require('nvim-treesitter').setup {
