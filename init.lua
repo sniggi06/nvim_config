@@ -21,9 +21,33 @@ vim.pack.add({
 })
 
 -- ==== AUSSEHEN ====
--- colorscheme
-vim.cmd.colorscheme('tokyonight-night')
+require('tokyonight').setup({
+  style = 'night',
 
+  on_colors = function(colors)
+    -- Editor-Hintergrund
+    colors.bg = '#171717'
+
+    -- Dunklere Hintergrundflächen
+    colors.bg_dark = '#202020'
+    colors.bg_dark1 = '#141414'
+
+    -- Popups, Floats und Statusleiste
+    colors.bg_float = '#202020'
+    colors.bg_popup = '#202020'
+    colors.bg_sidebar = '#202020'
+    colors.bg_statusline = '#202020'
+
+    -- Dezente, neutrale Rahmen
+    colors.border = '#303030'
+    colors.border_highlight = '#454545'
+
+    -- Dezente Hervorhebungsfläche
+    colors.bg_highlight = '#282828'
+  end,
+})
+
+vim.cmd.colorscheme('tokyonight-night')
 -- ==== FUZZY FINDER ====
 -- mini.pick : fuzzy finder
 local pick = require('mini.pick').setup()
