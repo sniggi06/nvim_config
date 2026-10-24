@@ -1,3 +1,7 @@
+-- nvim-tree statt netrw als Datei-Explorer verwenden
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.g.mapleader = " "
 
 -- packages
@@ -9,6 +13,9 @@ vim.pack.add({
  { src = 'https://github.com/nvim-treesitter/nvim-treesitter',
    checkout = 'main',
  },
+
+ { src = 'https://github.com/nvim-tree/nvim-tree.lua' }, --file tree
+ { src = 'https://github.com/nvim-tree/nvim-web-devicons' }, -- icons für file tree
 
  { src = 'https://github.com/folke/tokyonight.nvim'},
 
@@ -170,6 +177,33 @@ require('blink.cmp').setup({
       auto_show_delay_ms = 500,
     },
   },
+})
+
+
+-- ==== nvim-tree dateibaum ====
+require('nvim-tree').setup({
+  view = {
+    side = 'left',
+    width = 34,
+  },
+
+  renderer = {
+    group_empty = false,
+  },
+
+  filters = {
+    dotfiles = false,
+    git_ignored = true,
+  },
+
+  update_focused_file = {
+    enable = true,
+    update_root = false,
+  },
+})
+
+vim.keymap.set('n', '<leader>t', ':NvimTreeToggle<CR>', {
+  desc = 'Toggle nvim-tree',
 })
 -- ==== BASICS ====
 -- FIX: weil kmonad einen ganz kurzen esc hold->release mit der CAPS-Makro schickt
