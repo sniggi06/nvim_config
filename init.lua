@@ -127,6 +127,14 @@ vim.filetype.add({
   },
 })
 
+-- clangd: AVR-Unterstützung für SPOS beim PSP
+vim.lsp.config('clangd', {
+  cmd = {
+    'clangd',
+    '--query-driver=/usr/bin/avr-gcc',
+  },
+})
+
 vim.lsp.enable({'clangd', 'pyright'})
 
 -- LSP keymaps
