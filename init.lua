@@ -24,6 +24,7 @@ vim.pack.add({
    src = 'https://github.com/Saghen/blink.cmp',
    version = 'v1.10.2', --V1 version: V2 ist ein großer rewrite, der für nvim.12 aber bald sinn machen könnte
  },
+ { src = 'https://github.com/lewis6991/gitsigns.nvim' }, -- an Zeilen sehen was dort bzgl. git los ist
 
 })
 
@@ -213,6 +214,39 @@ require('nvim-tree').setup({
 vim.keymap.set('n', '<leader>t', ':NvimTreeToggle<CR>', {
   desc = 'Toggle nvim-tree',
 })
+
+-- ==== GIT SIGNS ====
+require('gitsigns').setup({
+  signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  },
+
+  current_line_blame = false,
+})
+-- Git blame für aktuelle Zeile
+vim.keymap.set('n', '<leader>gb', '<cmd>Gitsigns blame_line<CR>', {
+  desc = 'Git blame line',
+})
+
+-- Inline-Blame ein-/ausschalten
+vim.keymap.set('n', '<leader>gB', '<cmd>Gitsigns blame<CR>', {
+  desc = 'Git blame file',
+})
+
+-- Änderung des aktuellen Hunks anzeigen
+vim.keymap.set('n', '<leader>gp', '<cmd>Gitsigns preview_hunk<CR>', {
+  desc = 'Preview Git hunk',
+})
+
+-- Diff zur Git-Version anzeigen
+vim.keymap.set('n', '<leader>gd', '<cmd>Gitsigns diffthis<CR>', {
+  desc = 'Git diff',
+})
+
 -- ==== BASICS ====
 -- FIX: weil kmonad einen ganz kurzen esc hold->release mit der CAPS-Makro schickt
 vim.o.ttimeout = true
