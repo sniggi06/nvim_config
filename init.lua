@@ -252,5 +252,11 @@ vim.keymap.set('n', '<leader>gd', '<cmd>Gitsigns diffthis<CR>', {
 vim.o.ttimeout = true
 vim.o.ttimeoutlen = 0 --MUSS weniger als der "around" in kmonad sein
 
+-- Splits resizen
+vim.keymap.set('n', '<C-Up>', '<cmd>resize +2<CR>')
+vim.keymap.set('n', '<C-Down>', '<cmd>resize -2<CR>')
+vim.keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<CR>')
+vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<CR>')
+
 -- basic optionen für vanilla nvim
 require('options') -- lua/options.lua
