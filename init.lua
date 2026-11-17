@@ -260,3 +260,6 @@ vim.keymap.set('n', '<C-Right>', '<cmd>vertical resize +2<CR>')
 
 -- basic optionen für vanilla nvim
 require('options') -- lua/options.lua
+
+-- custom keybinds
+require('custom.keybinds') -- lua/custom/keybinds.lua
