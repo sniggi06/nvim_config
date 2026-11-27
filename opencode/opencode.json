@@ -1,0 +1,154 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "providers": {
+      "kiconnect": {
+        "name": "KI:connect (hosted elsewhere)",
+        "package": "@opencode/ai/providers/openai-compatible/responses",
+        "settings": {
+          "baseURL": "https://chat.kiconnect.nrw/api/v1"
+        },
+        "models": {
+          "gpt-6-luna": {
+            "name": "GPT-6 Luna (KI:connect)",
+                "limit": {
+                  "context": 128000,
+                  "output": 16000
+                },
+                "capabilities": {
+                  "tools": true,
+                  "input": ["text"],
+                  "output": ["text"]
+                }
+          }
+        }
+      },
+      "rwthgpt": {
+        "name": "RWTH-GPT (uni host)",
+        "package": "@opencode/ai/providers/openai-compatible",
+        "settings": {
+          "baseURL": "https://chat.kiconnect.nrw/api/v1"
+        },
+        "models": {
+          "gpt-oss-120b": {
+            "name": "GPT OSS 120B (Uni)",
+            "limit": { "context": 131100, "output": 8200 },
+            "capabilities": { "tools": true, "input": ["text"], "output": ["text"] }
+          },
+          "mistral-small-4-119b-2603": {
+            "name": "MISTRAL small 4 119B (Uni)",
+            "limit": { "context": 262100, "output": 64000 },
+            "capabilities": { "tools": true, "input": ["text"], "output": ["text"] }
+          },
+          "qwen3.8-27b": {
+            "name": "QWEN 3.8 27B (Uni)",
+            "limit": { "context": 256000, "output": 131100 },
+            "capabilities": { "tools": true, "input": ["text"], "output": ["text"] }
+          }
+        }
+      },
+      "ollama": {
+        "models": {
+          "qwen3.5:9b": {
+            "name": "Qwen 3.5 9B (Local, 16k)",
+            "limit": {
+              "context": 16384,
+              "output": 4096
+            }
+          },
+          "devstral-small-2:latest": {
+            "name": "Devstral Small 2 (Local, 16k)",
+            "limit": {
+              "context": 16384,
+              "output": 4096
+            }
+          }
+        }
+      }
+    },
+    "permissions": [
+      {
+        "action": "external_directory",
+        "resource": "*",
+        "effect": "ask"
+      }
+    ],
+    "agents": {
+        "build": {
+          "mode": "primary",
+          "description": "Delegierter Build-Modus: selbstständig implementieren und testen.",
+          "permissions": [
+            {
+              "action": "edit",
+              "resource": "*",
+              "effect": "allow"
+            },
+            {
+              "action": "shell",
+              "resource": "*",
+              "effect": "allow"
+            },
+            {
+              "action": "shell",
+              "resource": "git push *",
+              "effect": "deny"
+            },
+            {
+              "action": "shell",
+              "resource": "git -C * push *",
+              "effect": "deny"
+            }
+          ]
+        },
+        "build-controlled": {
+          "mode": "primary",
+          "description": "Kontrollierter Build-Modus: analysiert selbstständig; Änderungen und ausführende Shell-Befehle benötigen Freigabe.",
+          "permissions": [
+            {
+              "action": "edit",
+              "resource": "*",
+              "effect": "ask"
+            },
+            {
+              "action": "shell",
+              "resource": "*",
+              "effect": "ask"
+            },
+            {
+              "action": "shell",
+              "resource": "git status *",
+              "effect": "allow"
+            },
+            {
+              "action": "shell",
+              "resource": "git diff *",
+              "effect": "allow"
+            },
+            {
+              "action": "shell",
+              "resource": "git log *",
+              "effect": "allow"
+            },
+            {
+              "action": "shell",
+              "resource": "git show *",
+              "effect": "allow"
+            },
+            {
+              "action": "shell",
+              "resource": "pwd",
+              "effect": "allow"
+            },
+            {
+              "action": "shell",
+              "resource": "git push *",
+              "effect": "deny"
+            },
+            {
+              "action": "shell",
+              "resource": "git -C * push *",
+              "effect": "deny"
+            }
+          ]
+        }
+      }
+}
